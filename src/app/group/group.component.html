@@ -9,14 +9,15 @@
     <div class="mx-auto m-5">
         <div class="container px-4">
             <div class="row text-center">
-                <h1>Group x</h1>
+                <h1>Group 1</h1>
             </div> <br>
             <div class="row text-center">
                 <div class="col-sm-2"></div>
-                <h2 class="col-sm-3">Select Chat</h2>
+                <h2 class="col-sm-3">Select Channel</h2>
                 <div class="col-sm-6 ">
-                    <a class="btn btn-outline-warning mx-4" routerLink="/home">Back</a>
-                    <a class="btn btn-outline-danger" routerLink="/home">Leave Group</a>
+                    <a class="btn btn-outline-warning mx-2" routerLink="/home">Back</a>
+                    <a class="btn btn-outline-danger mx-2" routerLink="/home">Leave Group</a>
+                    <a class="btn btn-outline-primary mx-2" routerLink="/group">Create Channel</a>
                 </div>
             </div>
             <div class="mx-auto " style="max-width: 60vw">
@@ -25,13 +26,14 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <p class="fw-bold">Chat1 Name</p>
+                                    <p class="fw-bold">Channel1 Name</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="fw-light">A description of sorts</p>
                                 </div>
                                 <div class="col text-center">
-                                    <a class="btn btn-primary" routerLink="/chat">Open Chat</a>
+                                    <a class="btn btn-primary mx-2" routerLink="/chat">Open Channel</a>
+                                    <a class="btn btn-outline-danger">Remove</a>
                                 </div>
                             </div>
                         </div>
@@ -42,13 +44,14 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <p class="fw-bold">Chat2 Name</p>
+                                    <p class="fw-bold">Channel2 Name</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="fw-light">A description of sorts</p>
                                 </div>
                                 <div class="col text-center">
-                                    <a class="btn btn-primary" routerLink="/chat">Open Chat</a>
+                                    <a class="btn btn-primary mx-2" routerLink="/chat">Open Channel</a>
+                                    <a class="btn btn-outline-danger">Remove</a>
                                 </div>
                             </div>
                         </div>
@@ -59,13 +62,14 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <p class="fw-bold">Chat3 Name</p>
+                                    <p class="fw-bold">Channel3 Name</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="fw-light">A description of sorts</p>
                                 </div>
                                 <div class="col text-center">
-                                    <a class="btn btn-primary" routerLink="/chat">Open Chat</a>
+                                    <a class="btn btn-primary mx-2" routerLink="/chat">Open Channel</a>
+                                    <a class="btn btn-outline-danger">Remove</a>
                                 </div>
                             </div>
                         </div>
@@ -76,19 +80,82 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <p class="fw-bold">Chat4 Name</p>
+                                    <p class="fw-bold">Channel4 Name</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="fw-light">A description of sorts</p>
                                 </div>
                                 <div class="col text-center">
-                                    <a class="btn btn-primary" routerLink="/chat">Open Chat</a>
+                                    <a class="btn btn-primary mx-2" routerLink="/chat">Open Channel</a>
+                                    <a class="btn btn-outline-danger">Remove</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> <br>
+            <div class="card mx-auto border-info" style="max-width: 60vw">
+                <h5 class="card-header">
+                    Users
+                </h5>
+                <ul class="list-group list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">user123</div>
+                            <div class="col-4">
+                                <p class="fw-light fst-italic">user - REPORTED</p>
+                            </div>
+                            <div class="col">
+                                <div class="btn btn-outline-success m-2">Promote to Group Admin</div>
+                                <div class="btn btn-outline-danger m-2">Remove/Ban</div>
+                                <div class="btn btn-outline-success m-2">Promote to Super Admin</div>
+                                <div class="btn btn-outline-danger m-2">Report</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">user234</div>
+                            <div class="col-4">
+                                <p class="fw-light fst-italic">group admin</p>
+                            </div>
+                            <div class="col">
+                                <!-- <div class="btn btn-outline-success m-2">Promote to Group Admin</div> -->
+                                <!-- <div class="btn btn-outline-danger m-2">Remove/Ban</div> -->
+                                <div class="btn btn-outline-success m-2">Promote to Super Admin</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">user345</div>
+                            <div class="col-4">
+                                <p class="fw-light fst-italic">super admin</p>
+                            </div>
+                            <div class="col">
+                                <!-- <div class="btn btn-outline-success m-2">Promote to Group Admin</div> -->
+                                <!-- <div class="btn btn-outline-danger m-2">Remove/Ban</div> -->
+                                <!-- <div class="btn btn-outline-success m-2">Promote to Super Admin</div> -->
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">user456</div>
+                            <div class="col-4">
+                                <p class="fw-light fst-italic">user - PENDING</p>
+                            </div>
+                            <div class="col">
+                                <!-- <div class="btn btn-outline-success m-2">Promote to Group Admin</div> -->
+                                <!-- <div class="btn btn-outline-danger m-2">Remove/Ban</div> -->
+                                <!-- <div class="btn btn-outline-success m-2">Promote to Super Admin</div> -->
+                                <div class="btn btn-outline-success m-2">Accept Into Group</div>
+                                <div class="btn btn-outline-danger m-2">Reject</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div> <br> <br>
         </div>
     </div>
     <router-outlet></router-outlet>
