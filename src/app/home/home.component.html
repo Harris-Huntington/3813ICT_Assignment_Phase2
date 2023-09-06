@@ -16,62 +16,33 @@
                 <h2 class="col-sm-3">Select A Group</h2>
                 <!-- <div class="col-sm-1"></div> -->
                 <div class="col-sm-6 ">
-                    <a class="btn btn-outline-primary">Create Group</a>
+                    <button *ngIf="currentUser.roles.length > 1"class="btn btn-outline-primary" (click)="onCreateGroup()">Create Group</button>
                 </div>
             </div>
             <br>
             <br>
-            <div class="row gx-5">
-            <div class="col">
-                <div class="card border-info">
-                    <div class="card-header">
-                        <div class="row">
-                            <h4 class="col-9">Group 1</h4>
-                            <div class="col btn btn-outline-danger">Delete</div>
-                          </div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text text-body-secondary">All about 1's!</p>
-                        <div class="text-center">
-                            <a routerLink="/group" class="btn btn-primary">Access Group</a>
+            <div class="row gx-5" *mcRenderer="trigger">
+                <!--  -->
+                <div class="col" *ngFor="let group of currentGroups">
+                    <div class="card border-info">
+                        <div class="card-header">
+                            <div class="row">
+                                <h4 class="col-9">Group {{group.id + 1}}</h4>
+                                <button *ngIf="currentUser.roles.length > 1 && currentUser.groups.includes('group' + (group.id + 1))" class="col btn btn-outline-danger">Delete</button>
+                                <button *ngIf="currentUser.roles.length == 1 && currentUser.groups.includes('group' + (group.id + 1))" class="col btn btn-outline-warning">Leave</button>
+                            </div>
                         </div>
-                      
+                        <div class="card-body">
+                            <p class="card-text text-body-secondary">All about {{group.id + 1}}'s!</p>
+                            <div class="text-center">
+                                <button *ngIf="currentUser.groups.includes('group' + (group.id + 1))" routerLink="/group" class="btn btn-primary">Access Group</button>
+                                <button *ngIf="!currentUser.groups.includes('group' + (group.id + 1))" class="btn btn-primary">Register Interest</button>
+                            </div>
+                        
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card border-info">
-                    <div class="card-header">
-                        <div class="row">
-                            <h4 class="col-9">Group 2</h4>
-                            <div class="col btn btn-outline-danger">Delete</div>
-                          </div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text text-body-secondary">This group is about the number 2</p>
-                        <div class="text-center">
-                            <a routerLink="/group" class="btn btn-primary">Access Group</a>
-                        </div>
-                      
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-info">
-                    <div class="card-header">
-                        <div class="row">
-                            <h4 class="col-9">Group 3</h4>
-                            <div class="col btn btn-outline-warning">Leave</div>
-                          </div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text text-body-secondary">3! That's what we talk about here</p>
-                        <div class="text-center">
-                            <a routerLink="/group" class="btn btn-primary">Access Group</a>
-                        </div>
-                    </div>
-                  </div>
-            </div>
+                <!--  -->
             </div>
         </div>
     </div>

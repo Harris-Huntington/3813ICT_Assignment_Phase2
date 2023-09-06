@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  // currentUser: any[] = [];
+  public trigger: number = 0;
 
   currentUser: any = {
     id: '',
@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
     groups: [],
   }
 
+  currentGroups: any[] = []
+  allUsers: any[] = []
+
   constructor(public sharedService: SharedService, public router: Router) { }
 
   ngOnInit(): void {
@@ -27,6 +30,41 @@ export class HomeComponent implements OnInit {
     if(loggedInUser != null) {
       this.currentUser = JSON.parse(loggedInUser)
     }
+
+    const existingGroups = localStorage.getItem('groups')
+    if(existingGroups != null) {
+      this.currentGroups = JSON.parse(existingGroups)
+    }
+
+    const localData = localStorage.getItem('users')
+    if(localData != null) {
+      this.allUsers = JSON.parse(localData)
+    }
+
+  }
+
+  public rerender(): void {
+    this.trigger ++;
+  }
+
+  onCreateGroup() {
+    const newGroupId = this.currentGroups.length
+
+    const user = this.allUsers.find(user => user.username === this.currentUser.username)
+    if (user) { 
+      if (!user.groups.includes('group' + (newGroupId + 1))) {
+        user.groups.push('group' + (newGroupId + 1));
+      }
+      localStorage.setItem('users', JSON.stringify(this.allUsers));
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+    }
+    this.currentGroups.push({id: newGroupId, interested: []})
+    localStorage.setItem('groups', JSON.stringify(this.currentGroups))
+    this.router.navigate(['home'])
+    this.rerender()
+  }
+
+  onDeleteGroup() {
 
   }
 

@@ -95,65 +95,24 @@
                 </div>
             </div> <br>
             <div class="card mx-auto border-info" style="max-width: 60vw">
-                <h5 class="card-header">
-                    Users
-                </h5>
+                <h5 class="card-header">Users</h5>
                 <ul class="list-group list-group">
-                    <li class="list-group-item">
+                    <!-- Loop for users -->
+                    <li class="list-group-item" *ngFor="let user of allUsers">
                         <div class="row">
-                            <div class="col-2">user123</div>
+                            <div class="col-2">{{user.username}}</div>
                             <div class="col-4">
-                                <p class="fw-light fst-italic">user - REPORTED</p>
+                                <p class="fw-light fst-italic">{{user.roles[user.roles.length-1]}}</p>
                             </div>
                             <div class="col">
-                                <div class="btn btn-outline-success m-2">Promote to Group Admin</div>
-                                <div class="btn btn-outline-danger m-2">Remove/Ban</div>
-                                <div class="btn btn-outline-success m-2">Promote to Super Admin</div>
-                                <div class="btn btn-outline-danger m-2">Report</div>
+                                <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-success m-2" (click)="promoteToGroupAdmin(user.username, 'group Admin')">Promote to Group Admin</button>
+                                <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-danger m-2">Remove/Ban</button>
+                                <button *ngIf="user.roles.length < 3 && currentUser.roles.length > 2" class="btn btn-outline-success m-2" (click)="promoteToSuperAdmin(user.username, 'super Admin')">Promote to Super Admin</button>
+                                <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-danger m-2">Report</button>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-2">user234</div>
-                            <div class="col-4">
-                                <p class="fw-light fst-italic">group admin</p>
-                            </div>
-                            <div class="col">
-                                <!-- <div class="btn btn-outline-success m-2">Promote to Group Admin</div> -->
-                                <!-- <div class="btn btn-outline-danger m-2">Remove/Ban</div> -->
-                                <div class="btn btn-outline-success m-2">Promote to Super Admin</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-2">user345</div>
-                            <div class="col-4">
-                                <p class="fw-light fst-italic">super admin</p>
-                            </div>
-                            <div class="col">
-                                <!-- <div class="btn btn-outline-success m-2">Promote to Group Admin</div> -->
-                                <!-- <div class="btn btn-outline-danger m-2">Remove/Ban</div> -->
-                                <!-- <div class="btn btn-outline-success m-2">Promote to Super Admin</div> -->
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-2">user456</div>
-                            <div class="col-4">
-                                <p class="fw-light fst-italic">user - PENDING</p>
-                            </div>
-                            <div class="col">
-                                <!-- <div class="btn btn-outline-success m-2">Promote to Group Admin</div> -->
-                                <!-- <div class="btn btn-outline-danger m-2">Remove/Ban</div> -->
-                                <!-- <div class="btn btn-outline-success m-2">Promote to Super Admin</div> -->
-                                <div class="btn btn-outline-success m-2">Accept Into Group</div>
-                                <div class="btn btn-outline-danger m-2">Reject</div>
-                            </div>
-                        </div>
-                    </li>
+                    <!--  -->
                 </ul>
             </div> <br> <br>
         </div>

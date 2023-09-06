@@ -27,17 +27,21 @@ export class AppComponent {
   ngOnInit() {
     console.log("Testing if DOM is ready");
 
-    let users = [ {id: 0, username: 'super', email: 'super@email.com', password: '123', roles: ['user', 'groupA', 'superA'], groups: ['group1', 'group2', 'group3']},
-                  {id: 1, username: 'user123', email: '123@email.com', password: '123', roles: ['user'], groups: ['group1']},
-                  {id: 2, username: 'user456', email: '456@email.com', password: '456', roles: ['user', 'groupA'], groups: ['group1', 'group2']},
-                ]
+    let users = [
+      {id: 0, username: 'super', email: 'super@email.com', password: '123', roles: ['user', 'group Admin', 'super Admin'], groups: ['group1', 'group2']},
+      {id: 1, username: 'user123', email: '123@email.com', password: '123', roles: ['user'], groups: ['group1']},
+      {id: 2, username: 'user456', email: '456@email.com', password: '456', roles: ['user', 'group Admin'], groups: ['group2']},
+    ]
+
+    let groups = [
+      {id: 0, interested: []},
+      {id: 1, interested: ['user123']},
+    ]
 
     if(typeof(Storage) !== 'undefined') {
       console.log("Storage is Ready!")
       localStorage.setItem("users",JSON.stringify(users))
-      // console.log(localStorage.getItem("users"))
-      let newUsers = localStorage.getItem("users") || "";
-      console.log(JSON.parse(newUsers))
+      localStorage.setItem("groups",JSON.stringify(groups))
     } else {
       console.log("No Storage Support")
     }
