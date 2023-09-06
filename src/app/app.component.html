@@ -32,10 +32,11 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form> -->
-      <div class="text-center">
-        <p class="fw-bold">Welcome, user345: Super Admin</p>
-        <button class="btn btn-outline-warning mx-2" type="submit" routerLink="/login">Logout</button>
-        <button class="btn btn-outline-danger" type="submit" routerLink="/login">Delete Account</button>
+      <div class="text-center" *ngIf="sharedService.isLoggedIn">
+        <!-- <p class="fw-bold">Welcome, {{currentUser.username}}: </p> -->
+        <button class="btn btn-outline-warning mx-1" type="submit" routerLink="/login" (click)="onLogout()">Logout</button>
+        <button class="btn btn-outline-primary mx-1" type="submit" routerLink="/create-user" (click)="onLogout()">Create Account</button>
+        <button class="btn btn-outline-danger mx-1" type="submit" routerLink="/login" (click)="onDeleteAccount()">Delete Account</button>
       </div>
     </div>
   </nav>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SharedService } from './shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,25 +8,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'SFassignment';
 
-  createUserObj: any = {
+  constructor(public sharedService: SharedService, public router: Router) {}
+
+  title = 'ChatPlication';
+
+  currentUser: any = {
+    id: '',
     username: '',
     email: '',
     password: '',
+    roles: [],
+    groups: [],
   }
 
-  loginObj: any = {
-    username: '',
-    password: '',
-  }
+  
 
   ngOnInit() {
     console.log("Testing if DOM is ready");
 
-    let users = [ {id: 0, username: 'super', email: 'super@email.com', password: '123', roles: ['user', 'groupA', 'superA'], groups: ['group1', 'group2', 'group3'], loggedIn: false},
-                  {id: 1, username: 'user123', email: '123@email.com', password: '123', roles: ['user'], groups: ['group1'], loggedIn: false},
-                  {id: 2, username: 'user456', email: '456@email.com', password: '456', roles: ['user', 'groupA'], groups: ['group1', 'group2'],loggedIn: false},
+    let users = [ {id: 0, username: 'super', email: 'super@email.com', password: '123', roles: ['user', 'groupA', 'superA'], groups: ['group1', 'group2', 'group3']},
+                  {id: 1, username: 'user123', email: '123@email.com', password: '123', roles: ['user'], groups: ['group1']},
+                  {id: 2, username: 'user456', email: '456@email.com', password: '456', roles: ['user', 'groupA'], groups: ['group1', 'group2']},
                 ]
 
     if(typeof(Storage) !== 'undefined') {
@@ -36,7 +41,34 @@ export class AppComponent {
     } else {
       console.log("No Storage Support")
     }
+
+    if(this.sharedService.isLoggedIn = false) {
+      this.router.navigate(['login']);
+    }
+
   }
 
+  onLogout() {
+    this.sharedService.isLoggedIn = false;
+    localStorage.setItem('loggedInUser', JSON.stringify(null))
+  }
+
+  onDeleteAccount() {
+    this.sharedService.isLoggedIn = false;
+    
+    const users: any[] = JSON.parse(localStorage.getItem('users') || '[]');
+    const loggedInUser: any = JSON.parse(localStorage.getItem('loggedInUser') || '[]');
+
+    const userIndex = users.findIndex((user) => user.username === loggedInUser.username);
+    if (userIndex !== -1) {
+      users.splice(userIndex, 1);
+
+      localStorage.setItem('users', JSON.stringify(users));
+
+      if (loggedInUser && loggedInUser.username === loggedInUser.username) {
+        localStorage.setItem('loggedInUser', JSON.stringify(null));
+      }
+    }     
+  }
 
 }

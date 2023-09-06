@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-create-user',
@@ -14,10 +15,9 @@ export class CreateUserComponent implements OnInit {
     password: '',
     roles: ["user"],
     groups: [],
-    loggedIn: false
   }
 
-  constructor() { }
+  constructor(public sharedService: SharedService) { }
 
   ngOnInit(): void {
   }
@@ -29,5 +29,7 @@ export class CreateUserComponent implements OnInit {
     oldUsers.push(this.createUserObj);
     console.log("oldUsers", oldUsers);
     localStorage.setItem('users', JSON.stringify(oldUsers));
+    localStorage.setItem('loggedInUser', JSON.stringify(this.createUserObj));
+    this.sharedService.isLoggedIn = true;
   }
 }

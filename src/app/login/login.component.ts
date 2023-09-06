@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private SharedService: SharedService) { }
 
   ngOnInit(): void {
     const localData = localStorage.getItem('users')
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
     if(doesUserExist != undefined) {
       // alert('User login successful')
       localStorage.setItem("loggedInUser", JSON.stringify(doesUserExist))
+      this.SharedService.isLoggedIn = true
       this.router.navigate(['home'])
     } else {
       // alert('User not found')

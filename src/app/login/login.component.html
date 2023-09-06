@@ -26,13 +26,15 @@
             <button type="button" class="btn btn-primary btn-block mb-4" style="width: 400px" (click)="onLogin()">Sign in</button>
 
             <!-- <div [innerHTML]="displayWrongLogin()"></div> -->
-            <div *ngIf="wrongLogin">
-                <h4>Wrong Username or Password</h4>
-            </div>
+            <div *ngIf="wrongLogin" class="text-center">
+                <h4 class="text-danger-emphasis">Wrong Username or Password</h4>
+            </div> <br>
 
             <!-- Create User button -->
-            <button type="button" class="btn btn-outline-primary btn-block mb-4" style="width: 400px" routerLink="/create-user">Create User</button>
-
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-primary btn-block mb-4" style="width: 200px" routerLink="/create-user">Create User</button>
+            </div>
+            
         </form>
         <router-outlet></router-outlet>
     </div>
