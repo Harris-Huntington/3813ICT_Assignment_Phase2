@@ -104,5 +104,7 @@
       }
     }
   },
-  "defaultProject": "SFassignment"
+  "cli": {
+    "analytics": false
+  }
 }

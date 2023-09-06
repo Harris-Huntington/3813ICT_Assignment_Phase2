@@ -9,7 +9,6 @@ import { HomeComponent } from './home/home.component';
 import { GroupComponent } from './group/group.component';
 import { ChatComponent } from './chat/chat.component';
 import { CreateUserComponent } from './create-user/create-user.component';
-import { NgxRerenderModule } from 'ngx-rerender';
 
 
 @NgModule({
@@ -25,7 +24,6 @@ import { NgxRerenderModule } from 'ngx-rerender';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxRerenderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

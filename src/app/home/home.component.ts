@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, TemplateRef } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  public trigger: number = 0;
 
   currentUser: any = {
     id: '',
@@ -43,9 +42,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  public rerender(): void {
-    this.trigger ++;
-  }
+  
 
   onCreateGroup() {
     const newGroupId = this.currentGroups.length
@@ -60,14 +57,11 @@ export class HomeComponent implements OnInit {
     }
     this.currentGroups.push({id: newGroupId, interested: []})
     localStorage.setItem('groups', JSON.stringify(this.currentGroups))
-    this.router.navigate(['home'])
-    this.rerender()
+    this.router.navigate(['group'])
   }
 
   onDeleteGroup() {
-
-  }
-
   
+  }
 
 }
