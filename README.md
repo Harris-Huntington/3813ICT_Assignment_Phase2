@@ -1,27 +1,62 @@
-# SFassignment
+# Software Frameworks Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+This project was created by Harris Huntington (s5259286).
 
-## Development server
+## Git
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Git and GitHub were used as version control software for this project. This has allowed me to have confidence that if I make any breaking changes I have the ability to revert back to a working copy without losing too much progress.
 
-## Code scaffolding
+The layout of my git repository is pretty standard and basic. I have yet to use branching as I have not required the need for it with due to the size of the features I have implemented so far, particularly because I have been working on my own, however, I may start creating branches for the second part of the assignment when more complex features are to be implemented.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+My general approach to version control for this project hasn't been too strict. I have just been making sure that I commit changes semi-regularly, as well as whenever I complete anything that could be regarded as a seperate section and am ready to move onto the next section. This is provides me with plenty enough points to return too, without having to follow a strict schedule. 
 
-## Build
+I have also been uploading to github with every commit to ensure maximum saftey of the repository.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Data Structures
 
-## Running unit tests
+Data structures are still a work in progress and are likely to change significantly with the next assignemnt and conversion to an external database.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Presently all data is stored in localStorage, initialised into the storage on every start up. There are two main data structures, the users and the groups. As well as two secondary structures, loggedInUser and currentGroup.
 
-## Running end-to-end tests
+The first structure is the **users**. This holds all of the information about all of the users in an array of users.
+It is structured as follows:
+```
+[   {id: *num*, 
+    username: *string*, 
+    email: *string*, 
+    password: *string*, 
+    roles: *arr[]*, 
+    groups: *arr[ ]*},
+]
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The second structure is for the **groups**. This holds all of the information about the groups in an array of groups. Currently it holds the channel data as well, however this is very likely to change for the second part of this project.
+It is structured as follows:
+```
+[   {id: *num*, 
+    interested: *arr[]*, 
+    channels: [
+        {channel1: 
+            [{userA: *string*}, 
+            {userB: *string*}
+            ]
+        },
+    ]},
+]
+```
 
-## Further help
+The third structure is the **loggedInUser**. This contains just the user data for the user who is currently logged in. It is structured the same as the first structure, **users**, however it only holds the one user, rather than many of them.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The fourth and final structure is **currentGroup**. Very similar to the **loggedInUser**, except that this is for the group. It is used to get the data for the channels and messages within. Likewise to to above, it follows the same structure as **groups**, except that it only contains the one group, rather than many of them.
+
+## REST API
+
+The REST API aspect of this project is still a work in progress and will be built more upon the next phase of the project. Currently because the project is using localStorage as specified in eariler criteria, there is little to comment on. When dealing with the localStorage, the `get` and `set` methods have been critical. Although basic, these methods have provided a great building block for the rest of the project and the conversion over to a more accurate representation of a RESTful API.
+
+## Angular Architecture
+
+This Angular application makes good use of components. It has one for each page of the application, **login**, **create-user**, **home**, **group**, and **chat**, as well as using the top-level  **app.component** for the navbar and any leftover background. These components are routed to through different button presses and triggers throughout the application, making for a seamless transistion through the whole app.
+
+This Angular application also uses a service, called `sharedServicee`, that stores the `isLoggedIn` state which allows for the different routes to componenets to be guarded so that they can't be navigated to without the correct permissions.
+
+`[(ngModel)]` was also used in the input boxes to be able to take the data from them so that it can be used for log in/ sign up
