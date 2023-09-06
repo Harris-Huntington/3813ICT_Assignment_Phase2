@@ -17,6 +17,7 @@ export class GroupComponent implements OnInit {
   }
 
   allUsers: any[] = []
+  currentGroup: any = []
 
   constructor() { }
 
@@ -26,9 +27,14 @@ export class GroupComponent implements OnInit {
       this.currentUser = JSON.parse(loggedInUser)
     }
 
-    const localData = localStorage.getItem('users')
-    if(localData != null) {
-      this.allUsers = JSON.parse(localData)
+    const localUserData = localStorage.getItem('users')
+    if(localUserData != null) {
+      this.allUsers = JSON.parse(localUserData)
+    }
+
+    const localGroupData = localStorage.getItem('currentGroup')
+    if(localGroupData != null) {
+      this.currentGroup = JSON.parse(localGroupData)
     }
   }
 
@@ -53,6 +59,25 @@ export class GroupComponent implements OnInit {
       }
       localStorage.setItem('users', JSON.stringify(this.allUsers));
     }
+  }
+
+  removeUser(username: string) {
+    const user = this.allUsers.find(user => user.username === username)
+    if (user) {
+      user.groups.pop();
+      localStorage.setItem('users', JSON.stringify(this.allUsers));
+    }
+  }
+
+  deleteUser(username: string) {
+    const users: any[] = JSON.parse(localStorage.getItem('users') || '[]');
+
+    const userIndex = users.findIndex((user) => user.username === username);
+    if (userIndex !== -1) {
+      users.splice(userIndex, 1);
+
+      localStorage.setItem('users', JSON.stringify(users));
+    } 
   }
 
 }

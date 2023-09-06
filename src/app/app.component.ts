@@ -28,14 +28,15 @@ export class AppComponent {
     console.log("Testing if DOM is ready");
 
     let users = [
-      {id: 0, username: 'super', email: 'super@email.com', password: '123', roles: ['user', 'group Admin', 'super Admin'], groups: ['group1', 'group2']},
+      {id: 0, username: 'super', email: 'super@email.com', password: '123', roles: ['user', 'group Admin', 'super Admin'], groups: ['group1', 'group2', 'group3']},
       {id: 1, username: 'user123', email: '123@email.com', password: '123', roles: ['user'], groups: ['group1']},
       {id: 2, username: 'user456', email: '456@email.com', password: '456', roles: ['user', 'group Admin'], groups: ['group2']},
     ]
 
     let groups = [
-      {id: 0, interested: []},
-      {id: 1, interested: ['user123']},
+      {id: 0, interested: [], channels: [{channel1: [{super: "some ch1 text"}, {user123: "ch1 response text"}]}, {channel2: [{super: "some ch2 text"}]}]},
+      {id: 1, interested: ['user123'], channels: [{channel1: [{super: "some ch1 text"}, {user456: "ch1 response text"}]}, {channel2: [{super: "some ch2 text"}]}]},
+      {id: 2, interested: [], channels:[]},
     ]
 
     if(typeof(Storage) !== 'undefined') {

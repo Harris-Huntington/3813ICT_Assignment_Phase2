@@ -9,7 +9,7 @@
     <div class="mx-auto m-5">
         <div class="container px-4">
             <div class="row text-center">
-                <h1>Group 1</h1>
+                <h1>Group {{currentGroup.id + 1}}</h1>
             </div> <br>
             <div class="row text-center">
                 <div class="col-sm-2"></div>
@@ -99,16 +99,18 @@
                 <ul class="list-group list-group">
                     <!-- Loop for users -->
                     <li class="list-group-item" *ngFor="let user of allUsers">
-                        <div class="row">
-                            <div class="col-2">{{user.username}}</div>
-                            <div class="col-4">
-                                <p class="fw-light fst-italic">{{user.roles[user.roles.length-1]}}</p>
-                            </div>
-                            <div class="col">
-                                <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-success m-2" (click)="promoteToGroupAdmin(user.username, 'group Admin')">Promote to Group Admin</button>
-                                <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-danger m-2">Remove/Ban</button>
-                                <button *ngIf="user.roles.length < 3 && currentUser.roles.length > 2" class="btn btn-outline-success m-2" (click)="promoteToSuperAdmin(user.username, 'super Admin')">Promote to Super Admin</button>
-                                <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-danger m-2">Report</button>
+                        <div *ngIf="user.groups.includes('group' + (currentGroup.id + 1))">
+                            <div class="row">
+                                <div class="col-2">{{user.username}}</div>
+                                <div class="col-4">
+                                    <p class="fw-light fst-italic">{{user.roles[user.roles.length-1]}}</p>
+                                </div>
+                                <div class="col">
+                                    <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-success m-2" (click)="promoteToGroupAdmin(user.username, 'group Admin')">Promote to Group Admin</button>
+                                    <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-danger m-2" (click)="removeUser(user.username)">Remove</button>
+                                    <button *ngIf="user.roles.length < 3 && currentUser.roles.length > 2" class="btn btn-outline-success m-2" (click)="promoteToSuperAdmin(user.username, 'super Admin')">Promote to Super Admin</button>
+                                    <button *ngIf="user.roles.length == 1 && currentUser.roles.length > 1" class="btn btn-outline-danger m-2"(click)="deleteUser(user.username)">Delete User</button>
+                                </div>
                             </div>
                         </div>
                     </li>

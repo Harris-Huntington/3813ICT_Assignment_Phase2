@@ -21,37 +21,29 @@
             </div>
             <br>
             <br>
-
-            <div>
-                <ng-container #outlet [ngTemplateOutlet]="groupContent">
-                </ng-container>
-            </div>
-
-            <ng-template #groupContent>
-                <div class="row gx-5">
-                    <!--  -->
-                    <div class="col" *ngFor="let group of currentGroups">
-                        <div class="card border-info">
-                            <div class="card-header">
-                                <div class="row">
-                                    <h4 class="col-9">Group {{group.id + 1}}</h4>
-                                    <button *ngIf="currentUser.roles.length > 1 && currentUser.groups.includes('group' + (group.id + 1))" class="col btn btn-outline-danger">Delete</button>
-                                    <button *ngIf="currentUser.roles.length == 1 && currentUser.groups.includes('group' + (group.id + 1))" class="col btn btn-outline-warning">Leave</button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text text-body-secondary">All about {{group.id + 1}}'s!</p>
-                                <div class="text-center">
-                                    <button *ngIf="currentUser.groups.includes('group' + (group.id + 1))" routerLink="/group" class="btn btn-primary">Access Group</button>
-                                    <button *ngIf="!currentUser.groups.includes('group' + (group.id + 1))" class="btn btn-primary">Register Interest</button>
-                                </div>
-                            
+            <div class="row gx-5" >
+                <!--  -->
+                <div class="col" style="min-width: 400px; max-width: 500px;" *ngFor="let group of currentGroups">
+                    <div class="card border-info">
+                        <div class="card-header">
+                            <div class="row">
+                                <h4 class="col-9">Group {{group.id + 1}}</h4>
+                                <button *ngIf="currentUser.roles.length > 1 && currentUser.groups.includes('group' + (group.id + 1))" class="col btn btn-outline-danger" (click)="onDeleteGroup(group.id)">Delete</button>
+                                <button *ngIf="currentUser.roles.length == 1 && currentUser.groups.includes('group' + (group.id + 1))" class="col btn btn-outline-warning">Leave</button>
                             </div>
                         </div>
+                        <div class="card-body">
+                            <p class="card-text text-body-secondary">All about {{group.id + 1}}'s!</p>
+                            <div class="text-center">
+                                <button *ngIf="currentUser.groups.includes('group' + (group.id + 1))" routerLink="/group" class="btn btn-primary" (click)="onAccessGroup(group.id)">Access Group</button>
+                                <button *ngIf="!currentUser.groups.includes('group' + (group.id + 1))" class="btn btn-primary">Register Interest</button>
+                            </div>
+                        
+                        </div>
                     </div>
-                    <!--  -->
                 </div>
-            </ng-template>
+                <!--  -->
+            </div>
         </div>
     </div>
     <router-outlet></router-outlet>
