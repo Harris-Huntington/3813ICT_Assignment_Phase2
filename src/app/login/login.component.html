@@ -11,19 +11,24 @@
             <h2>Login</h2>
             <!-- Email input -->
             <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example1">Email address</label>
-                <input type="email" id="form2Example1" class="form-control" />
+                <label class="form-label" for="username">Username</label>
+                <input type="username" id="username" class="form-control" name="username" [(ngModel)]="loginObj.username"/>
             
             </div>
         
             <!-- Password input -->
             <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example2">Password</label>
-                <input type="password" id="form2Example2" class="form-control" />
+                <label class="form-label" for="password">Password</label>
+                <input type="password" id="password" class="form-control" name="password" [(ngModel)]="loginObj.password"/>
             </div>
         
             <!-- Submit button -->
-            <button type="button" class="btn btn-primary btn-block mb-4" style="width: 400px" routerLink="/home">Sign in</button>
+            <button type="button" class="btn btn-primary btn-block mb-4" style="width: 400px" (click)="onLogin()">Sign in</button>
+
+            <!-- <div [innerHTML]="displayWrongLogin()"></div> -->
+            <div *ngIf="wrongLogin">
+                <h4>Wrong Username or Password</h4>
+            </div>
 
             <!-- Create User button -->
             <button type="button" class="btn btn-outline-primary btn-block mb-4" style="width: 400px" routerLink="/create-user">Create User</button>
