@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { dataService } from '../data.Serice';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ export class LoginComponent implements OnInit {
 
   loginUsers: any[] = [];
 
+  allusers: any[] = [];
+
   wrongLogin = false;
 
   loginObj: any = {
@@ -18,13 +21,18 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(public router: Router, private SharedService: SharedService) { }
+  constructor(public router: Router, private SharedService: SharedService, private userData:dataService) { }
 
   ngOnInit(): void {
     const localData = localStorage.getItem('users')
     if(localData != null) {
       this.loginUsers = JSON.parse(localData)
     }
+
+    this.userData.findUsers().subscribe((data) => {
+      this.allusers = data
+      console.log("Find all users:", this.allusers)
+    })
   }
 
   onLogin(){
