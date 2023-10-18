@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SharedService } from './shared.service';
 import { Router } from '@angular/router';
+import { dataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(public sharedService: SharedService, public router: Router) {}
+  constructor(public sharedService: SharedService, public router: Router, private userData:dataService) {}
 
   title = 'ChatPlication';
 
@@ -74,6 +75,18 @@ export class AppComponent {
         localStorage.setItem('loggedInUser', JSON.stringify(null));
       }
     }     
+  }
+
+  onDeleteAccountDB() {
+    this.sharedService.isLoggedIn = false;
+
+    const loggedInUser: any = JSON.parse(localStorage.getItem('loggedInUser') || '[]');
+
+    this.userData.deleteUsers(loggedInUser.id)
+
+    if (loggedInUser && loggedInUser.username === loggedInUser.username) {
+      localStorage.setItem('loggedInUser', JSON.stringify(null));
+    }  
   }
 
 }
