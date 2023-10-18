@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       this.loginUsers = JSON.parse(localData)
     }
 
-    this.userData.findUsers().subscribe((data) => {
+    this.userData.loginUsers().subscribe((data) => {
       this.allusers = data
       console.log("Find all users:", this.allusers)
     })
@@ -37,6 +37,20 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     const doesUserExist = this.loginUsers.find(m => m.username == this.loginObj.username && m.password == this.loginObj.password)
+    console.log("doesUserExist", doesUserExist)
+    if(doesUserExist != undefined) {
+      // alert('User login successful')
+      localStorage.setItem("loggedInUser", JSON.stringify(doesUserExist))
+      this.SharedService.isLoggedIn = true
+      this.router.navigate(['home'])
+    } else {
+      // alert('User not found')
+      this.wrongLogin = true
+    }
+  }
+
+  onLoginDB(){
+    const doesUserExist = this.allusers.find(m => m.username == this.loginObj.username && m.password == this.loginObj.password)
     console.log("doesUserExist", doesUserExist)
     if(doesUserExist != undefined) {
       // alert('User login successful')
