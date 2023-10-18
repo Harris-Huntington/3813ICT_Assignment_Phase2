@@ -12,15 +12,15 @@ export class SocketService {
     private socket: any;
     constructor() {     }
 
-    initSocket(): void {
+    initSocket(): void { // Initialising socket
         this.socket = io(SERVER_URL)
     }
 
-    sendMessage(message: string): void {
+    sendMessage(message: string): void { // Send message with socket
         this.socket.emit('message', message)
     }
 
-    getMessage(next: any) {
+    getMessage(next: any) { // Get message with socket
         this.socket.on('message', (message: string) => next(message))
     }
 

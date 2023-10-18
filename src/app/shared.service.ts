@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class SharedService {
 
   constructor() { }
-
+  // General service to store if the user is logged in
   isLoggedIn = false;
 }

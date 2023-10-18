@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class dataService {
     constructor(private http: HttpClient) {}
 
+    // Names are self explanatory. See corresponding API's for more details.
     findUsers(){
         console.log('findUsers testing')
         return this.http.get<any>('http://localhost:3000/api/findusers')

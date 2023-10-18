@@ -10,3 +10,5 @@ module.exports = function(db,app) {
         })
     })
 }
+
+// Sets a specified group to the specified user, allows for adding groups to users and vice versa.

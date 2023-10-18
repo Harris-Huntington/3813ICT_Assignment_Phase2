@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http'
 export class ImguploadService {
     constructor(private http: HttpClient) { }
 
-    imgupload(fd:any){
+    imgupload(fd:any){ // Setting route for the image upload information
         return this.http.post<any>('/api/upload', fd)
     }
 }
