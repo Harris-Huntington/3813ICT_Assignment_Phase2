@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { Router } from '@angular/router';
 import { dataService } from '../data.service';
+import { ImguploadService } from '../imgupload.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,10 @@ export class HomeComponent implements OnInit {
   currentGroups: any[] = []
   allUsers: any[] = []
 
-  constructor(public sharedService: SharedService, public router: Router, public changeDetector: ChangeDetectorRef, private userData:dataService) { }
+  selectedfile: any;
+  imagepath = "";
+
+  constructor(public sharedService: SharedService, public router: Router, public changeDetector: ChangeDetectorRef, private userData:dataService, private imguploadService: ImguploadService) { }
 
   ngOnInit(): void {
     const loggedInUser = localStorage.getItem('loggedInUser')
@@ -104,7 +108,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['group'])
   }
 
-  onDeleteGroupDB(groupId: number) {
+  onDeleteGroupDB(groupId: number) {  // Deleting group using mongoDB
     this.userData.deleteGroup(groupId);
   }
 
@@ -119,5 +123,18 @@ export class HomeComponent implements OnInit {
     }  
   }
 
+  onFileSelected(event: any){ // Getting the file when it is selected
+    console.log(event);
+    this.selectedfile = event.target.files[0]
+  }
+
+  onUpload() {
+    const fd = new FormData();
+    fd.append('image',this.selectedfile,this.selectedfile.name);
+    this.imguploadService.imgupload(fd).subscribe(res=> {
+      this.imagepath = res.data.filename;
+      console.log(res.data.filename + ',' + res.data.size);
+    })
+  }
 
 }

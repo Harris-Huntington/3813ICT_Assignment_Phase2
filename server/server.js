@@ -25,6 +25,7 @@
 // })
 
 const express = require('express');
+const formidable = require('formidable');
 const app = express();
 const http = require('http').Server(app);
 const bodyParser = require('body-parser');
@@ -44,6 +45,8 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+
+require('./routes/api-uploadimg.js')(app,formidable);
 
 sockets.connect(io, PORT);
 

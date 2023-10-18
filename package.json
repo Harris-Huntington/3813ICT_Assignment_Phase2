@@ -21,6 +21,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
+    "formidable": "^3.5.1",
     "mongodb": "^6.1.0",
     "ngx-rerender": "^1.2.0",
     "node": "^18.10.0",
