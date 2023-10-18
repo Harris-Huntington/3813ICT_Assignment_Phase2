@@ -6,3 +6,5 @@ module.exports = function(db,app) {
         })
     })
 }
+
+// using to test functionality

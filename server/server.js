@@ -34,7 +34,7 @@ const ObjectID = require('mongodb').ObjectId;
 
 app.use(cors());
 app.use(bodyParser.json());
-const url = 'mongodb://127.0.0.1:27017';
+const url = 'mongodb://localhost:27017';
 MongoClient.connect(url, {}, function(err, client) {
     if (err) {
         console.error("Failed to connect to MongoDB:", err);
@@ -54,12 +54,12 @@ MongoClient.connect(url, {}, function(err, client) {
 // Add a global error handler for unhandled exceptions
 process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    // You can decide how to handle unhandled rejections here.
+    // option to handle unhandled rejections here.
 });
 
 process.on('uncaughtException', (err) => {
     console.error('Uncaught Exception:', err);
-    // You can decide how to handle uncaught exceptions here.
+    // option to handle uncaught exceptions here.
 });
 
 // app.use(cors());
