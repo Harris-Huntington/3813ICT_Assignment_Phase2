@@ -31,9 +31,24 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectId;
+const sockets = require('./sockets.js');
+const server = require('./listen.js');
+const io = require('socket.io')(http,{
+    cors: {
+        origin: "http://localhost:4200",
+        methods: ["GET", "POST"],
+    }
+})
+
+const PORT = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+
+sockets.connect(io, PORT);
+
+server.listen(http, PORT);
+
 const url = 'mongodb://localhost:27017';
 MongoClient.connect(url, {}, function(err, client) {
     if (err) {
@@ -44,11 +59,20 @@ MongoClient.connect(url, {}, function(err, client) {
     const dbName = '3813_Assignment2';
     const db = client.db(dbName);
 
+    require('./routes/api-createchannel.js')(db, app)
+    require('./routes/api-creategroup.js')(db, app);
+    require('./routes/api-createusers.js')(db, app);
+    require('./routes/api-deletegroup.js')(db, app);
+    require('./routes/api-deleteuser.js')(db, app);
     require('./routes/api-findusers.js')(db, app);
+    require('./routes/api-getgroups.js')(db, app);
+    require('./routes/api-login.js')(db, app);
+    require('./routes/api-setgrouptouser.js')(db, app);
 
-    http.listen(3000, () => {
-        console.log("Server is running on port 3000");
-    });
+    // Should start running here but won't because mongoDB is playing up
+    // http.listen(3000, () => { 
+    //     console.log("Server is running on port 3000");
+    // });
 });
 
 // Add a global error handler for unhandled exceptions
@@ -62,18 +86,3 @@ process.on('uncaughtException', (err) => {
     // option to handle uncaught exceptions here.
 });
 
-// app.use(cors());
-// app.use(bodyParser.json());
-// const url = 'mongodb://127.0.0.1:27017';
-// MongoClient.connect(url, {},function(err, client) {
-//     if (err) {return console.log("errrs ahoy: ", err)}
-
-//     const dbName = '3813_Assignment2';
-//     const db = client.db(dbName);
-
-//     require('./routes/api-findusers.js')(db, app);
-
-//     app.listen(3000, () => {
-//         console.log("listening on port 3000");
-//     })
-// });
