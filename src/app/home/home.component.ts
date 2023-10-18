@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
     this.selectedfile = event.target.files[0]
   }
 
-  onUpload() {
+  onUpload() { // Uploading the file
     const fd = new FormData();
     fd.append('image',this.selectedfile,this.selectedfile.name);
     this.imguploadService.imgupload(fd).subscribe(res=> {

@@ -6,7 +6,7 @@ module.exports = {
         var socketRoom = [];
         var socketRoomNum = []
 
-        const chat = io.of("/chat");
+        const chat = io.of("/chat"); // Set alias
 
         // setting up connection
         chat.on("connection",(socket) => {
