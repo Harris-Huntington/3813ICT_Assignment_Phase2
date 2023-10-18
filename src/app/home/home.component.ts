@@ -104,6 +104,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['group'])
   }
 
+  onDeleteGroupDB(groupId: number) {
+    this.userData.deleteGroup(groupId);
+  }
+
   onDeleteGroup(groupId: number) {
     const groups: any[] = JSON.parse(localStorage.getItem('groups') || '[]');
 

@@ -41,4 +41,9 @@ export class dataService {
         console.log('setGroupToUser testing')
         return this.http.post<any>('http://localhost:3000/api/setgrouptouser', {"user": user})
     }
+
+    deleteGroup(groupID:number) {
+        console.log('deleteGroup testing')
+        return this.http.post<any>('http://localhost:3000/api/deletegroup', {"groupID": groupID})
+    }
 }
