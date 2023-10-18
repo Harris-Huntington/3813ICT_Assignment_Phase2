@@ -9,6 +9,7 @@ export class dataService {
     constructor(private http: HttpClient) {}
 
     findUsers(){
+        console.log('findUsers testing')
         return this.http.get<any>('http://localhost:3000/api/findusers')
     }
 }

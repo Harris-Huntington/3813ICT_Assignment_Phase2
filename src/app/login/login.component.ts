@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from '../shared.service';
-import { dataService } from '../data.Serice';
+import { dataService } from '../data.service';
 
 @Component({
   selector: 'app-login',

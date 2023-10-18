@@ -29,21 +29,51 @@ const app = express();
 const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const MonogoClient = require('mongodb').MonogoClient;
+const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectId;
 
 app.use(cors());
 app.use(bodyParser.json());
-const url = 'mongodb://localhost:27017';
-MongoClient.connect(url, {poolSize: 10, useNewUrlParser: true, useUnifiedTopology: true},function(err, client) {
-    if (err) {return console.log("errrs ahoy: ", err)}
+const url = 'mongodb://127.0.0.1:27017';
+MongoClient.connect(url, {}, function(err, client) {
+    if (err) {
+        console.error("Failed to connect to MongoDB:", err);
+        process.exit(1); // Exit the application on a MongoDB connection error
+    }
 
     const dbName = '3813_Assignment2';
     const db = client.db(dbName);
 
     require('./routes/api-findusers.js')(db, app);
 
-    app.listen(http, () => {
-        console.log("listening on port 3000");
-    })
+    http.listen(3000, () => {
+        console.log("Server is running on port 3000");
+    });
 });
+
+// Add a global error handler for unhandled exceptions
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    // You can decide how to handle unhandled rejections here.
+});
+
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+    // You can decide how to handle uncaught exceptions here.
+});
+
+// app.use(cors());
+// app.use(bodyParser.json());
+// const url = 'mongodb://127.0.0.1:27017';
+// MongoClient.connect(url, {},function(err, client) {
+//     if (err) {return console.log("errrs ahoy: ", err)}
+
+//     const dbName = '3813_Assignment2';
+//     const db = client.db(dbName);
+
+//     require('./routes/api-findusers.js')(db, app);
+
+//     app.listen(3000, () => {
+//         console.log("listening on port 3000");
+//     })
+// });
