@@ -7,7 +7,7 @@ module.exports = function(db,app,ObjectID) {
         userID = req.body.userid;
         // Create a new monogy objectID from the passed in _id
         var objectid = new ObjectID(userID);
-        const collection = db.collection('users');
+        const collection = db.collection('Users');
         // Delete a single user  based on its unique ID
         collection.deleteOne({_id: objectid},(err,docs)=>{
             // Get a new listing of all items in the database and return to client
