@@ -60,14 +60,15 @@ This application implements a REST API. The angular front end communicates with 
 - getgroups: gets all of the groups when requested
 - login: logs the user in when requested
 - setgrouptouser: gives the user a new group when one is created or added
+- uploadimg: handles uploading the image to the server
 
 ## Angular Architecture
 
 This Angular application makes good use of components. It has one for each page of the application, **login**, **create-user**, **home**, **group**, and **chat**, as well as using the top-level  **app.component** for the navbar and any leftover background. These components are routed to through different button presses and triggers throughout the application, making for a seamless transistion through the whole app.
 
-This Angular application also uses multiple services, the first called `sharedService`, that stores the `isLoggedIn` state which allows for the different routes to componenets to be guarded so that they can't be navigated to without the correct permissions. Second is the `socketService`. This manages the socket and chat implementation by allowing routes for initialising the socket as well as sending and recieving messages. Finally is the `dataService`, which provides for all of the connection between the REST API's provided through Node.js and mongodb. The Services are listed in more detail below.
+This Angular application also uses multiple services, the first called `sharedService`, that stores the `isLoggedIn` state which allows for the different routes to componenets to be guarded so that they can't be navigated to without the correct permissions. Second is the `socketService`. This manages the socket and chat implementation by allowing routes for initialising the socket as well as sending and recieving messages. There is an `imgUpload` service as well that handles the connections for uploading any images. Finally is the `dataService`, which provides for all of the connection between the REST API's provided through Node.js and mongodb. The Services are listed in more detail below.
 
-`[(ngModel)]` was also used in the input boxes to be able to take the data from them so that it can be used for log in/ sign up
+`[(ngModel)]` was also used in the input boxes to be able to take the data from them so that it can be used for log in/sign up
 
 **Services**
 - shared.service: general purpose service
@@ -85,3 +86,5 @@ This Angular application also uses multiple services, the first called `sharedSe
   - getGroup
   - setGroupToUser
   - deleteGroup
+- imgupload.service: service for uploading images
+  - imgupload
