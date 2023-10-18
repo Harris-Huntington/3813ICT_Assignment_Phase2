@@ -15,12 +15,12 @@ const io = require('socket.io')(http,{
     }
 })
 
+require('./routes/api-uploadimg.js')(app,formidable);
+
 const PORT = 3000;
 
 app.use(cors()); // using cors to communicate across origins
 app.use(bodyParser.json());
-
-require('./routes/api-uploadimg.js')(app,formidable);
 
 sockets.connect(io, PORT); // Connect to socket
 
