@@ -3,7 +3,7 @@ module.exports = {
     connect: function(io, PORT){
         
         var rooms = ["room1", "room2"];
-        var socketRooms = [];
+        var socketRoom = [];
         var socketRoomNum = []
 
         const chat = io.of("/chat");

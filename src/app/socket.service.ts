@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 
-import * as io from 'socket.io-client'
+import io from 'socket.io-client'
 
 const SERVER_URL = 'http://localhost:3000/chat'
 
@@ -13,7 +13,7 @@ export class SocketService {
     constructor() {     }
 
     initSocket(): void {
-        this.socket = (io as any)(SERVER_URL)
+        this.socket = io(SERVER_URL)
     }
 
     sendMessage(message: string): void {

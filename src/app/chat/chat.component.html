@@ -56,6 +56,24 @@
                                 <p class="card-text">user345 chimes in a counter-point</p>
                             </div>
                         </div> <br>
+                        <div class="card border-info">
+                            <h5 class="card-header">Chat Here</h5>
+                            <div class="card-body">
+                                <!-- <p class="card-text">user345 chimes in a counter-point</p> -->
+                                <input type="text" [(ngModel)]="messagecontent" name="messagecontent" class="form-control"/>
+                                <button (click)="chat()" class="btn btn-primary">Chat</button>
+                            </div>
+                        </div> <br>
+                        <ul>
+                            <li *ngFor= "let message of messages">
+                                <div class="card border-info">
+                                    <h5 class="card-header">User345</h5>
+                                    <div class="card-body">
+                                        <p class="card-text">{{message}}</p>
+                                    </div>
+                                </div> <br>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
